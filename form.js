@@ -10,7 +10,7 @@ const updateLocalStorage = () => {
   localStorage.setItem(USER_MEMORY, JSON.stringify(users))
 }
 
-const updateUIUserList = () => {
+const updateDocUserList = () => {
   userList.innerHTML = ''
 
   users.forEach((user) => {
@@ -32,7 +32,7 @@ form.addEventListener('submit', (event) => {
     updateLocalStorage()
 
     console.log(user, 'salvato in memoria')
-    updateUIUserList()
+    updateDocUserList()
   } else {
     alert('Il nome deve contenere almeo un carattere')
   }
@@ -51,7 +51,7 @@ deleteBtn.addEventListener('click', () => {
     console.log('rifiutato')
     alert('non abbiamo cancellato i dati')
   }
-  updateUIUserList()
+  updateDocUserList()
 })
 
 let updateTimer = function () {
