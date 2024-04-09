@@ -39,39 +39,37 @@ form.addEventListener('submit', (event) => {
 })
 
 deleteBtn.addEventListener('click', () => {
-  const hasAccepted = confirm('vuoi davvero resettare?')
+  const hasAccepted = confirm("vuoi davvero cancellare l'ultimo user?")
 
   if (hasAccepted) {
     console.log('accettato')
     users.pop()
     updateLocalStorage()
     form.reset()
-    console.log('Ultimo user rimosso')
+    console.log('ultimo user rimosso')
   } else {
     console.log('rifiutato')
-    alert('non abbiamo cancellato i dati')
+    alert("non abbiamo cancellato l'ultimo user")
   }
   updateDocUserList()
 })
 
+let timer = sessionStorage.getItem('TIMER_MEMORY')
+  ? sessionStorage.getItem('TIMER_MEMORY')
+  : 0
+
 let updateTimer = function () {
-  let timer = sessionStorage.getItem('timer')
-
-  if (!timer) {
-    timer = 0
-  } else {
-    timer = parseInt(timer)
-  }
-
-  document.getElementById('timer').textContent = timer
   timer++
-  sessionStorage.setItem('timer', timer)
+  sessionStorage.setItem('TIMER_MEMORY', timer)
+  document.getElementById('timer').textContent = timer
 }
 
 let startTimer = function () {
-  updateTimer()
-
   setInterval(updateTimer, 1000)
 }
 
-window.onload = startTimer
+window.onload = function () {
+  document.getElementById('timer').textContent = timer
+  updateDocUserList()
+  startTimer()
+}
